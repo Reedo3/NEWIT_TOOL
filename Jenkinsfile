@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
+                bat 'cd client'
+                bat 'npm install'
+                bat 'npm run build'
             }
         }
     }
