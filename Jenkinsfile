@@ -5,7 +5,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+         
         sh 'node --version'
+        sh 'cd client'
+        sh 'npm run build'
+
       }
     }
   }
