@@ -1,14 +1,17 @@
 pipeline {
   agent {
-    docker { image 'node:latest' }
+    docker { 
+      image 'node:latest' 
+      args '-u root:root'
+      }
   }
   stages {
     stage('Build') {
       steps {
         dir('client'){
             sh 'node --version'
-            sh 'sudo npm install'
-            sh 'sudo npm run build'
+            sh 'npm install'
+            sh 'npm run build'
         } 
       }
     }
