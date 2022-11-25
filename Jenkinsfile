@@ -7,9 +7,16 @@ pipeline {
       steps {
         dir('client'){
             sh 'node --version'
+            sh 'npm install'
             sh 'npm run build'
         } 
       }
+    }
+  }
+
+  post{
+    always{
+      cleanWs()
     }
   }
 }
