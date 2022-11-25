@@ -8,10 +8,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        dir('client'){
+        dir('server'){
             sh 'node --version'
             sh 'npm install'
-            sh 'npm run build'
         } 
       }
     }
