@@ -1,16 +1,40 @@
-import React from 'react';
-import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
+import React, {useState} from 'react';
+import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import logo from './honeywell-aerospace.jpg'
+import axios from 'axios';
 
-function loginForm() {
+function LoginForm() {
+  
+  const[Email,setEmail] = useState("");
+  const[Password, setPassword] = useState("");
 
+  axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const data = {
+      email: Email,
+      password: Password
+    };
+
+    axios.post('server/loginauth/', data)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  console.log("Hello World!")
+  
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
 
       <MDBRow>
 
         <MDBCol col='10' md='6'>
-          <img src={logo} class="img-fluid"  />
+          <img src={logo} class="img-fluid" alt="" />
         </MDBCol>
 
         <MDBCol col='4' md='6'>
@@ -37,19 +61,22 @@ function loginForm() {
             <p className="text-center fw-bold mx-3 mb-0">Platform SW Export Control Database</p>
           </div>
 
-          <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+          <form onSubmit={handleLogin}>
 
-          <div className="d-flex justify-content-between mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="!#">Forgot password?</a>
-          </div>
+            <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" onChange={(e)=>{setEmail(e.target.value)}}/>
+            <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" onChange={(e)=>{setPassword(e.target.value)}}/>
 
-          <div className='text-center text-md-start mt-4 pt-2'>
-            <MDBBtn className="mb-0 px-5" size='lg'>Login</MDBBtn>
-            <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="#!" className="link-danger">Register</a></p>
-          </div>
+            <div className="d-flex justify-content-between mb-4">
+              <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
+              <a href="rstPass">Forgot password?</a>
+            </div>
 
+            <div className='text-center text-md-start mt-4 pt-2'>
+               <MDBBtn className="mb-0 px-5" size='lg' type='submit'>Login</MDBBtn>
+              <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="register" className="link-danger">Register</a></p>
+            </div>
+
+          </form>
         </MDBCol>
 
       </MDBRow>
@@ -64,6 +91,7 @@ function loginForm() {
 
     </MDBContainer>
   );
-}
+};
 
-export default loginForm;
+
+export default LoginForm;

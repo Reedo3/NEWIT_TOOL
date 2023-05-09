@@ -1,0 +1,21 @@
+version: '3.8'
+services: 
+
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
+
+  client:
+    restart: always
+    build: ./newit_ui
+
+  api:
+    restart: always
+    build: ./Authentication
