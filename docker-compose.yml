@@ -3,7 +3,7 @@ services:
 
   nginx:
     depends_on:
-      - api
+      - auth_api
       - client
     restart: always
     build:
@@ -16,6 +16,12 @@ services:
     restart: always
     build: ./newit_ui
 
-  api:
+  auth_api:
     restart: always
     build: ./Authentication
+  
+  mongo_db:
+    image: mongo:latest
+    volumes:
+      - /data/db
+

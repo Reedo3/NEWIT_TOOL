@@ -17,7 +17,9 @@ function LoginForm() {
       password: Password
     };
 
-    axios.post('server/loginauth/', data)
+    // Axios method to send login info
+    // axios.post('auth_api/loginAuth', data)
+    axios.get('/auth/loginAuth/', data)
       .then(response => {
         console.log(response.data);
       })
@@ -61,7 +63,7 @@ function LoginForm() {
             <p className="text-center fw-bold mx-3 mb-0">Platform SW Export Control Database</p>
           </div>
 
-          <form onSubmit={handleLogin}>
+          <form on onSubmit={handleLogin}>
 
             <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" onChange={(e)=>{setEmail(e.target.value)}}/>
             <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" onChange={(e)=>{setPassword(e.target.value)}}/>
