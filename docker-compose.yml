@@ -19,9 +19,10 @@ services:
   auth_api:
     restart: always
     build: ./Authentication
-  
+
   mongo_db:
     image: mongo:latest
     volumes:
-      - /data/db
-
+      - dbdata:/data/db
+volumes:
+  dbdata:
