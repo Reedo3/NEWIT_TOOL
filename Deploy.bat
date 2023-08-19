@@ -1,1 +1,0 @@
-docker compose -f  .\newit_ui\docker-compose.yml up -d
